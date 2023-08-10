@@ -1,0 +1,28 @@
+@import url('https://v1.fontapi.ir/css/Yekan');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    [type='text'],
+          [type='email'],
+          [type='url'],
+          [type='password'],
+          [type='number'],
+          [type='date'],
+          [type='datetime-local'],
+          [type='month'],
+          [type='search'],
+          [type='tel'],
+          [type='time'],
+          [type='week'],
+          [multiple],
+          textarea,
+          select {
+            @apply w-full rounded-md border-none focus:outline-none focus:ring-indigo-500 invalid:border-red-600 invalid:!ring-red-600;
+          }
+
+          [type='checkbox'] {
+            @apply rounded text-indigo-500 focus:outline-none focus:ring-indigo-500;
+          }
+}

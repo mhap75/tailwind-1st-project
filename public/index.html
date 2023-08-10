@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="build/tailwind.css" />
+    <title>Digitize Shop App</title>
+</head>
+
+<body class="my-2 h-screen scroll-smooth bg-stone-100 text-sm text-slate-800 md:text-base">
+    <!-- app heading bar -->
+    <header class="mt-11 mb-6 flex items-center justify-between px-4 md:hidden">
+        <div class="w-8">
+            <img src="../assets/image/logo.png" alt="" />
+        </div>
+        <div class="text-lg font-bold">ساعت هوشمند</div>
+        <div class="flex aspect-square w-7 items-center justify-center rounded-md bg-white shadow-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                class="h-5 w-5 stroke-slate-800 stroke-2">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+            </svg>
+        </div>
+    </header>
+    <!-- desktop header -->
+    <header
+        class="container sticky top-1 z-50 mx-auto hidden w-full px-4 md:block md:max-w-screen-lg xl:max-w-screen-2xl">
+        <nav class="mb-3 flex items-center justify-between rounded-lg bg-white p-4 shadow-lg">
+            <ul class="flex items-center gap-6 font-bold">
+                <li><img src="../assets/image/logo.png" alt="" /></li>
+                <li>خانه</li>
+                <li>تلفن همراه</li>
+                <li>ساعت هوشمند</li>
+                <li>لپ تاپ</li>
+            </ul>
+            <div class="mr-4 flex max-w-md flex-1 gap-3 rounded-lg bg-slate-100 p-2">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="h-6 w-6">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                </svg>
+                <input placeholder="نام محصول، برند یا رنگ"
+                    class="w-full bg-transparent text-sm focus:outline-none" type="search" />
+            </div>
+        </nav>
+    </header>
+    <main class="container mx-auto px-4 pb-20 md:max-w-screen-lg md:pb-4 xl:max-w-screen-2xl">
+        <!-- filter & sort buttons -->
+        <section class="mb-9 flex items-center justify-between gap-2 md:hidden">
+            <div class="flex flex-1 items-center gap-1 rounded-md bg-white px-1 py-3 shadow-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="h-5 w-5 stroke-orange-400 stroke-2">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M3.75 6.75h16.5M3.75 12h16.5M12 17.25h8.25" />
+                </svg>
+
+                <span>محبوب ترین محصول</span>
+            </div>
+            <div class="flex flex-1 items-center gap-1 rounded-md bg-white px-1 py-3 shadow-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="h-5 w-5 stroke-orange-400 stroke-2">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 01-.659 1.591l-5.432 5.432a2.25 2.25 0 00-.659 1.591v2.927a2.25 2.25 0 01-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 00-.659-1.591L3.659 7.409A2.25 2.25 0 013 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0112 3z" />
+                </svg>
+
+                <span>فیلتر: <span>برند اپل</span></span>
+            </div>
+        </section>
+        <!-- desktop top section -->
+        <section>
+            <div class="grid grid-cols-12 md:grid-rows-[55px_minmax(500px,_1fr)] md:gap-8">
+                <!-- sidebar -->
+                <div class="col-span-3 row-span-2 hidden text-sm md:block xl:col-span-2">
+                    <div class="sticky top-[100px] rounded-lg bg-white p-6">
+                        <!-- category -->
+                        <div class="mb-3 font-bold text-orange-600">دسته‌بندی</div>
+                        <ul x-data="{sort: '', activeClass: 'text-slate-800'}" class="space-y-3">
+                            <li @click="sort=1" :class="sort ===1 ? activeClass : ''"
+                                class="flex items-center gap-2 text-slate-400">
+                                <span class="h-5 w-5 rounded-full bg-slate-200"><img
+                                        class="relative top-1 right-2" src="../assets/image/mobile.svg"
+                                        alt="" /></span>
+                                <p>تلفن همراه</p>
+                            </li>
+                            <li @click="sort=2" :class="sort ===2 ? activeClass : ''"
+                                class="flex items-center gap-2 text-slate-400">
+                                <span class="h-5 w-5 rounded-full bg-slate-200"><img
+                                        class="relative top-1 right-2" src="../assets/image/monitor.svg"
+                                        alt="" /></span>
+                                <p>لپ تاپ</p>
+                            </li>
+                            <li @click="sort=3" :class="sort ===3 ? activeClass : ''"
+                                class="flex items-center gap-2 text-slate-400">
+                                <span class="h-5 w-5 rounded-full bg-slate-200"><img
+                                        class="relative top-1 right-2" src="../assets/image/watch.svg"
+                                        alt="" /></span>
+                                <p>ساعت هوشمند</p>
+                            </li>
+                        </ul>
+                        <!-- desktop filter -->
+                        <div class="my-3 font-bold text-orange-600">فیلتر</div>
+                        <ul x-data="{activeClass: 'text-slate-800', isOpen1: false, isOpen2: false, isOpen3: false}"
+                            class="space-y-3">
+                            <li @click="isOpen1= !isOpen1" :class="isOpen1 ? activeClass : ''"
+                                class="flex items-center gap-2 text-slate-400">
+                                <span class="h-5 w-5 rounded-full bg-slate-200"><img
+                                        class="relative top-1 right-2" src="../assets/image/mobile.svg"
+                                        alt="" /></span>
+                                <p>برند</p>
+                                <svg :class="isOpen1 ? 'rotate-180' : ''" xmlns="http://www.w3.org/2000/svg"
+                                    fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                    class="mr-auto h-4 w-4 transition-all">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                                </svg>
+                            </li>
+                            <div x-show="isOpen1" x-transition class="space-y-2 px-2">
+                                <label class="flex items-center gap-2" for="apple">
+                                    <input class="form-checkbox rounded text-orange-400" type="checkbox"
+                                        name="bran" id="apple" />
+                                    <span>اپل</span>
+                                </label>
+                                <label class="flex items-center gap-2" for="samsung">
+                                    <input class="form-checkbox rounded text-orange-400" type="checkbox"
+                                        name="bran" id="samsung" />
+                                    <span>سامسونگ</span>
+                                </label>
+                                <label class="flex items-center gap-2" for="xiaomi">
+                                    <input class="form-checkbox rounded text-orange-400" type="checkbox"
+                                        name="bran" id="xiaomi" />
+                                    <span>شیائومی</span>
+                                </label>
+                            </div>
+                            <li @click="isOpen2= !isOpen2" :class="isOpen2 ? activeClass : ''"
+                                class="flex items-center gap-2 text-slate-400">
+                                <span class="h-5 w-5 rounded-full bg-slate-200"><img
+                                        class="relative top-1 right-2" src="../assets/image/monitor.svg"
+                                        alt="" /></span>
+                                <p>لپ تاپ</p>
+                                <svg :class="isOpen2 ? 'rotate-180' : ''" xmlns="http://www.w3.org/2000/svg"
+                                    fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                    class="mr-auto h-4 w-4 transition-all">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                                </svg>
+                            </li>
+                            <li @click="isOpen3 = !isOpen3" :class="isOpen3 ? activeClass : ''"
+                                class="flex items-center gap-2 text-slate-400">
+                                <span class="h-5 w-5 rounded-full bg-slate-200"><img
+                                        class="relative top-1 right-2" src="../assets/image/watch.svg"
+                                        alt="" /></span>
+                                <p>ساعت هوشمند</p>
+                                <svg :class="isOpen3 ? 'rotate-180' : ''" xmlns="http://www.w3.org/2000/svg"
+                                    fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                    class="mr-auto h-4 w-4 transition-all">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                                </svg>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- filter -->
+                <div x-data="{sort: 1, activeClass: 'text-slate-800'}"
+                    class="col-span-9 hidden gap-4 rounded-lg bg-white p-4 md:flex xl:col-span-10">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor"
+                        class="h-6 w-6 scale-125 rounded-md bg-orange-200 stroke-orange-600 p-0.5">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M3.75 6.75h16.5M3.75 12h16.5M12 17.25h8.25" />
+                    </svg>
+                    <button @click="sort=1" :class="sort ===1 ? activeClass : ''"
+                        class="text-slate-400 hover:text-slate-600">
+                        محبوب‌ترین
+                    </button>
+                    <button @click="sort=2" :class="sort===2 ? activeClass : ''"
+                        class="text-slate-400 hover:text-slate-600">
+                        گران‌ترین
+                    </button>
+                    <button @click="sort=3" :class="sort===3 ? activeClass : ''"
+                        class="text-slate-400 hover:text-slate-600">
+                        ارزان‌ترین
+                    </button>
+                    <button @click="sort=4" :class="sort===4 ? activeClass : ''"
+                        class="text-slate-400 hover:text-slate-600">
+                        پرفروش‌ترین
+                    </button>
+                </div>
+                <!-- product -->
+                <div class="col-span-12 md:col-span-9 xl:col-span-10">
+                    <section
+                        class="grid grid-cols-2 gap-2 md:grid-cols-3 md:gap-6 lg:grid-cols-4 xl:grid-cols-5"
+                        x-data="{ products: [
+                        { id: 1, title: 'گوشی اپل آیفون ۱۳', price: '۴۸,۸۰۰,۰۰۰ تومان', imgSrc: '../assets/image/iphone-13.png' },
+                        { id: 2, title: 'ساعت هوشمند اپل واچ', price: '۴,۸۰۰,۰۰۰ تومان', imgSrc: '../assets/image/apple-watch-7.png' },
+                        { id: 3, title: 'گوشی اپل آیفون ۱۳', price: '۴۸,۸۰۰,۰۰۰ تومان', imgSrc: '../assets/image/iphone-13.png' },
+                        { id: 4, title: 'ساعت هوشمند اپل واچ', price: '۴,۸۰۰,۰۰۰ تومان', imgSrc: '../assets/image/apple-watch-7.png' },
+                        { id: 5, title: 'گوشی اپل آیفون ۱۳', price: '۴۸,۸۰۰,۰۰۰ تومان', imgSrc: '../assets/image/iphone-13.png' },
+                        { id: 6, title: 'ساعت هوشمند اپل واچ', price: '۴,۸۰۰,۰۰۰ تومان', imgSrc: '../assets/image/apple-watch-7.png' },
+                    ]}">
+                        <template x-for="product in products" :key="product.id">
+                            <article class="rounded-lg bg-white p-2 shadow-md hover:scale-105">
+                                <picture class="block rounded-lg bg-slate-300 p-5">
+                                    <img class="aspect-square object-contain" :src="product.imgSrc"
+                                        alt="iphone 13" />
+                                </picture>
+                                <!-- product description -->
+                                <div class="mt-2 flex flex-col gap-2">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-slate-400"> اپل </span>
+                                        <div class="flex">
+                                            <div
+                                                class="z-20 aspect-square w-5 rounded-full border-2 border-white bg-blue-500">
+                                            </div>
+                                            <div
+                                                class="z-10 -mr-1.5 aspect-square w-5 rounded-full border-2 border-white bg-red-500">
+                                            </div>
+                                            <div
+                                                class="-mr-1.5 aspect-square w-5 rounded-full border-2 border-white bg-green-500">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p x-text="product.title"></p>
+                                    <p x-text="product.price"
+                                        class="mt-2 text-left font-semibold text-orange-600"></p>
+                                    <hr />
+                                    <button class="w-full py-1 text-orange-500">
+                                        مشاهده و سفارش
+                                    </button>
+                                </div>
+                            </article>
+                        </template>
+                    </section>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- mobile navigation -->
+    <footer>
+        <nav
+            class="fixed bottom-0 left-0 z-30 w-full rounded-t-lg border-t border-t-gray-300 bg-white shadow-[0px_-4px_25px_0px_rgba(132,132,132,0.37)] md:hidden">
+            <ul x-data="{open: 1, activeClass: 'text-slate-800'}" class="flex justify-between px-4">
+                <li>
+                    <a @click="open=1" class="flex items-center justify-center gap-1 py-3 pr-4 text-base"
+                        href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                            fill="currentColor" :class="open===1 ? activeClass : ''"
+                            class="h-7 w-7 text-slate-400">
+                            <path fill-rule="evenodd"
+                                d="M9.293 2.293a1 1 0 011.414 0l7 7A1 1 0 0117 11h-1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-3a1 1 0 00-1-1H9a1 1 0 00-1 1v3a1 1 0 01-1 1H5a1 1 0 01-1-1v-6H3a1 1 0 01-.707-1.707l7-7z"
+                                clip-rule="evenodd" />
+                        </svg><span x-show="open===1">خانه</span></a>
+                </li>
+                <li>
+                    <a @click="open=2" class="flex items-center justify-center gap-1 py-3 pr-4 text-base"
+                        href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                            fill="currentColor" :class="open===2 ? activeClass : ''"
+                            class="h-7 w-7 text-slate-400">
+                            <path fill-rule="evenodd"
+                                d="M9.293 2.293a1 1 0 011.414 0l7 7A1 1 0 0117 11h-1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-3a1 1 0 00-1-1H9a1 1 0 00-1 1v3a1 1 0 01-1 1H5a1 1 0 01-1-1v-6H3a1 1 0 01-.707-1.707l7-7z"
+                                clip-rule="evenodd" />
+                        </svg><span x-show="open===2">خانه</span></a>
+                </li>
+                <li>
+                    <a @click="open=3" class="flex items-center justify-center gap-1 py-3 pr-4 text-base"
+                        href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                            fill="currentColor" :class="open===3 ? activeClass : ''"
+                            class="h-7 w-7 text-slate-400">
+                            <path fill-rule="evenodd"
+                                d="M9.293 2.293a1 1 0 011.414 0l7 7A1 1 0 0117 11h-1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-3a1 1 0 00-1-1H9a1 1 0 00-1 1v3a1 1 0 01-1 1H5a1 1 0 01-1-1v-6H3a1 1 0 01-.707-1.707l7-7z"
+                                clip-rule="evenodd" />
+                        </svg><span x-show="open===3">خانه</span></a>
+                </li>
+                <li>
+                    <a @click="open=4" class="flex items-center justify-center gap-1 py-3 pr-4 text-base"
+                        href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                            fill="currentColor" :class="open===4 ? activeClass : ''"
+                            class="h-7 w-7 text-slate-400">
+                            <path fill-rule="evenodd"
+                                d="M9.293 2.293a1 1 0 011.414 0l7 7A1 1 0 0117 11h-1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-3a1 1 0 00-1-1H9a1 1 0 00-1 1v3a1 1 0 01-1 1H5a1 1 0 01-1-1v-6H3a1 1 0 01-.707-1.707l7-7z"
+                                clip-rule="evenodd" />
+                        </svg><span x-show="open===4">خانه</span></a>
+                </li>
+            </ul>
+        </nav>
+    </footer>
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</body>
+
+</html>
